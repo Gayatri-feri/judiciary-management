@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Cases</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f4f7fb;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .case-card {
+            background: white ;
+            padding: 15px;
+            margin: 10px auto;
+            width: 60%;
+            border-radius: 10px;
+            box-shadow: 0px 2px 8px rgba(0,0.1,0,0.1);
+        }
+
+        .btn {
+            padding: 6px 12px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .delete {
+            background: #835C3B ;
+            color: white;
+        }
+
+        .edit {
+            background: orange;
+            color: white;
+        }
+
+        .back {
+            display: block;
+            margin: 20px auto;
+            background: #468;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            width: 150px;
+            border-radius: 6px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>📂 All Cases</h2>
+
+<!-- ✅ ONLY ONE -->
+<div id="cases"></div>
+
+<!-- ✅ EDIT BOX -->
+<div id="editBox" style="
+    display:none;
+    position:fixed;
+    top:20%;
+    left:30%;
+    width:40%;
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0.2,0,0.3);
+">
+
+<h3>Edit Case</h3>
+
+<form action="/cases/update" method="post">
+
+    <input type="hidden" id="editId" name="caseId">
+
+    <label>Type</label>
+    <input type="text" id="editType" name="caseType">
+
+    <label>Description</label>
+    <input type="text" id="editDesc" name="description">
+
+    <label>Status</label>
+    <select id="editStatus" name="status">
+        <option>Open</option>
+        <option>Pending</option>
+        <option>Closed</option>
+    </select>
+
+    <br><br>
+
+    <button type="submit">💾 Update</button>
+    <button type="button" onclick="closeEdit()">❌ Cancel</button>
+
+</form>
+
+</div>
+
+<a href="/dashboard" class="back">← Back</a>
+
+<!-- ✅ SCRIPT START -->
+<script>
+
+// LOAD CASES
+function loadCases() {
+    fetch("/cases")
+        .then(res => res.json())
+        .then(data => {
+
+            let output = "";
+
+            data.forEach(c => {
+                output += `
+                <div class="case-card">
+                    <b>ID:</b> ${c.caseId} <br>
+                    <b>Type:</b> ${c.caseType} <br>
+                    <b>Description:</b> ${c.description} <br>
+                    <b>Status:</b> ${c.status} <br>
+
+                    <button class="btn edit"
+                        onclick="editCase(${c.caseId}, '${c.caseType}', '${c.description}', '${c.status}')">
+                        ✏ Edit
+                    </button>
+
+                    <button class="btn delete"
+                        onclick="deleteCase(${c.caseId})">
+                        ❌ Delete
+                    </button>
+                </div>
+                `;
+            });
+
+            document.getElementById("cases").innerHTML = output;
+        });
+}
+
+// DELETE
+function deleteCase(id) {
+    if(confirm("Delete this case?")) {
+        window.location.href = "/cases/delete/" + id;
+    }
+}
+
+// EDIT
+function editCase(id, type, desc, status) {
+    document.getElementById("editId").value = id;
+    document.getElementById("editType").value = type;
+    document.getElementById("editDesc").value = desc;
+    document.getElementById("editStatus").value = status;
+
+    document.getElementById("editBox").style.display = "block";
+}
+
+// CLOSE
+function closeEdit() {
+    document.getElementById("editBox").style.display = "none";
+}
+
+// LOAD ON PAGE
+window.onload = loadCases;
+
+</script>
+<!-- ✅ SCRIPT END -->
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: linear-gradient(to right, #d7ccc8, #a1887f);
+            color: white;
+            text-align: center;
+        }
+
+        .container {
+            margin-top: 150px;
+        }
+
+        h1 {
+            font-size: 40px;
+        }
+
+        p {
+            font-size: 18px;
+        }
+
+        .loader {
+            margin: 30px auto;
+            border: 6px solid #f3f3f3;
+            border-top: 6px solid #5d4037;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+
+    <!-- AUTO REDIRECT AFTER 5 SECONDS -->
+    <script>
+        setTimeout(function(){
+            window.location.href = "/dashboard";
+        }, 5000);
+    </script>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>⚖ Welcome to Judiciary Management System</h1>
+    <p>Loading Dashboard...</p>
+
+    <div class="loader"></div>
+</div>
+
+</body>
+</html>

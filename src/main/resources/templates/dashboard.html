@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Judiciary Dashboard</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f5f0ea;
+            margin: 0;
+        }
+
+        .header {
+            background: #8d6e63;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 22px;
+            
+        }
+
+        .container {
+            width: 50%;
+            margin: auto;
+            margin-top: 30px;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #5d4037;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #a1887f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #8d6e63;
+        }
+
+        .view-btn {
+            margin-top: 10px;
+            background: #6d4c41;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+            }
+        }
+        
+    </style>
+</head>
+
+<body>
+
+<div class="header">
+    ⚖ Judiciary Dashboard
+</div>
+
+<div class="container">
+
+    <h3>Add New Case</h3>
+
+    <form action="/cases/save" method="post">
+
+        <!-- CASE TYPE -->
+        <label>Case Type</label>
+        <select id="caseType" name="caseType" onchange="updateDescriptions()" required>
+            <option value="">Select Case Type</option>
+            <option value="Civil">Civil</option>
+            <option value="Criminal">Criminal</option>
+            <option value="Family">Family</option>
+            <option value="Corporate">Corporate</option>
+            <option value="Cyber">Cyber Crime</option>
+            <option value="Property">Property</option>
+        </select>
+
+        <!-- DESCRIPTION -->
+        <label>Description</label>
+        <select name="description" id="description" required>
+            <option value="">Select Description</option>
+        </select>
+
+        <!-- STATUS -->
+        <label>Status</label>
+        <select name="status" required>
+            <option value="">Select Status</option>
+            <option value="Open">Open</option>
+            <option value="Pending">Pending</option>
+            <option value="Closed">Closed</option>
+        </select>
+
+        <!-- USER -->
+        <label>Assign User</label>
+        <select id="userId" name="userId" onchange="checkNewUser()" required>
+            <option value="">Select User</option>
+
+            <th:block th:each="user : ${users}">
+                <option th:value="${user.id}" th:text="${user.name}"></option>
+            </th:block>
+
+            <option value="new">➕ Add New User</option>
+        </select>
+
+        <input type="text" id="newUser" name="newUser"
+               placeholder="Enter New User Name"
+               style="display:none;">
+
+        <button type="submit">➕ Add Case</button>
+
+    </form>
+
+    <!-- ✅ CORRECT VIEW BUTTON (REDIRECT) -->
+    <a href="/cases-page">
+        <button class="view-btn">👁 View Cases</button>
+    </a>
+
+</div>
+
+<script>
+function updateDescriptions() {
+    let type = document.getElementById("caseType").value;
+    let descDropdown = document.getElementById("description");
+
+    let data = {
+        "Civil": ["Property dispute", "Divorce case", "Contract issue"],
+        "Criminal": ["Theft case", "Fraud case", "Assault case"],
+        "Family": ["Child custody", "Marriage dispute", "Adoption case"],
+        "Corporate": ["Company fraud", "Employee dispute"],
+        "Cyber": ["Hacking case", "Online fraud"],
+        "Property": ["Land dispute", "Illegal construction"]
+    };
+
+    descDropdown.innerHTML = "<option>Select Description</option>";
+
+    if (data[type]) {
+        data[type].forEach(d => {
+            let option = document.createElement("option");
+            option.value = d;
+            option.text = d;
+            descDropdown.appendChild(option);
+        });
+    }
+}
+
+function checkNewUser() {
+    let userSelect = document.getElementById("userId").value;
+    let newUserInput = document.getElementById("newUser");
+
+    if (userSelect === "new") {
+        newUserInput.style.display = "block";
+    } else {
+        newUserInput.style.display = "none";
+    }
+}
+</script>
+
+</body>
+</html>
