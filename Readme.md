@@ -98,7 +98,12 @@ The system follows **MVC (Model-View-Controller)** architecture:
 
 ## 🔄 Workflow
 
-1.
+1.User logs into the system with role selection
+2.System redirected to the dashboard
+3.User Creates a new case by entering required details
+4.case information is validated and stored in the database.
+5.User retrives and views all case records.
+6.user update or delkete recorsds when needed.
 ---
 
 ## 🗄️ Database Design
