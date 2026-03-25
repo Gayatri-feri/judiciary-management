@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Lawyer Dashboard</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            margin: 0;
+            background: #e3f2fd;
+        }
+
+        .header {
+            background: #1565c0;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 22px;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            width: 85%;
+            margin: auto;
+            margin-top: 30px;
+        }
+
+        .welcome {
+            background: #bbdefb;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .card {
+            flex: 1;
+            min-width: 250px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 3px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .card h3 {
+            color: #1565c0;
+        }
+
+        .btn {
+            margin-top: 10px;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            color: white;
+            font-size: 14px;
+        }
+
+        .view-btn {
+            background: #2e7d32;
+        }
+
+        .history-btn {
+            background: #ef6c00;
+        }
+
+        .track-btn {
+            background: #6a1b9a;
+        }
+
+        .logout-btn {
+            background: #c62828;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #555;
+        }
+
+        @media (max-width: 768px) {
+            .cards {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+    ⚖ Judiciary Management System - Lawyer Panel
+</div>
+
+<div class="container">
+
+    <!-- WELCOME -->
+    <div class="welcome">
+        <h2>Welcome, <span th:text="${userEmail}"></span></h2>
+        <p>Role: <strong>Lawyer</strong></p>
+    </div>
+
+    <!-- DASHBOARD CARDS -->
+    <div class="cards">
+
+        <!-- VIEW CASES -->
+        <div class="card">
+            <h3>📂 View Assigned Cases</h3>
+            <p>Check all your assigned cases and details.</p>
+            <a href="/cases-page">
+                <button class="btn view-btn">View Cases</button>
+            </a>
+        </div>
+
+        <!-- CASE HISTORY -->
+        <div class="card">
+            <h3>📜 Case History</h3>
+            <p>View past cases and previous records.</p>
+            <button class="btn history-btn">View History</button>
+        </div>
+
+        <!-- TRACK CASE -->
+        <div class="card">
+            <h3>📊 Track Case Progress</h3>
+            <p>Check status updates and hearing details.</p>
+            <button class="btn track-btn">Track Case</button>
+        </div>
+
+        <!-- NEXT HEARING -->
+        <div class="card">
+            <h3>📅 Next Hearing</h3>
+            <p>View upcoming hearing schedules.</p>
+            <button class="btn view-btn">Check Hearings</button>
+        </div>
+
+        <!-- LOGOUT -->
+        <div class="card">
+            <h3>🚪 Logout</h3>
+            <p>Exit from the system securely.</p>
+            <a href="/login">
+                <button class="btn logout-btn">Logout</button>
+            </a>
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <p>© 2026 Judiciary Management System</p>
+    </div>
+
+</div>
+
+</body>
+</html>

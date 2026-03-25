@@ -13,10 +13,10 @@ public class DashboardController {
     @Autowired
     private UserRepository userRepository;
 
-    // Welcome page
     @GetMapping("/")
     public String welcome() {
         return "welcome";
+    
     }
 
     // Dashboard page

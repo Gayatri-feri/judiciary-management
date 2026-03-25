@@ -78,7 +78,13 @@
 </div>
 
 <div class="container">
+	<h3>
+    Welcome <span th:text="${userEmail}"></span>
+</h3>
 
+<p>
+    Role: <span th:text="${role}"></span>
+</p>
     <h3>Add New Case</h3>
 
     <form action="/cases/save" method="post">
@@ -143,12 +149,13 @@ function updateDescriptions() {
     let descDropdown = document.getElementById("description");
 
     let data = {
-        "Civil": ["Property dispute", "Divorce case", "Contract issue"],
-        "Criminal": ["Theft case", "Fraud case", "Assault case"],
-        "Family": ["Child custody", "Marriage dispute", "Adoption case"],
-        "Corporate": ["Company fraud", "Employee dispute"],
-        "Cyber": ["Hacking case", "Online fraud"],
-        "Property": ["Land dispute", "Illegal construction"]
+        "Civil": ["Property dispute between family members", "Divorce and marital issue case", 
+        	"Contract violation case", "Tenant and landlord dispute", "Compensation claim case"],
+        "Criminal": ["Mobile theft case", "Physical assault case", "Online fraud case","Drug possession case", "Identity theft cybercrime"],
+        "Family": ["Child custody dispute", "Domestic violence case", "Marriage dispute case", "Family property division", "Adoption legal issue"],
+        "Corporate": ["Company fraud case", "Employee contract dispute", "Business partnership issue", "Financial mismanagement", "Company law violation"],
+        "Cyber": ["Online hacking case", "Social media fraud", "Data breach case", "Fake account scam", "Cyber bullying complaint"],
+        "Property": ["Land ownership dispute", "Illegal construction case", "Property registration issue", "Encroachment case", "Land document fraud"]
     };
 
     descDropdown.innerHTML = "<option>Select Description</option>";
